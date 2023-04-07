@@ -4,30 +4,29 @@
 #include <SoftwareSerial.h>
 #include <ArduinoJson.h>
 
-#define RXD2 16                      // RXD2 do ESP32 conectado ao TX do GPS
-#define TXD2 17                      // TXD2 do ESP32 conectado ao RX do GPS
-#define GPS_BAUDRATE 9600            // Baud rate do GPS
-#define WIFI_SSID "PRUU"             // SSID da rede WiFi
-#define WIFI_PASSWORD "joaoetheo"    // Senha da rede WiFi
-#define MQTT_SERVER "broker.emqx.io" // Endereço do servidor MQTT
-#define MQTT_PORT 1883               // Porta do servidor MQTT
-#define MQTT_TOPIC "data/location"   // Tópico MQTT para publicar as coordenadas
-#define MQTT_USERNAME "emqx"         // Usuario do servidor
-#define MQTT_PASSWORD "public"       // Senha do usuario
-#define LED 2                        // Led interno do esp32
-#define LED_EXT 15                   // Led externo ao esp32
-#define DELAY 5000                   // Delay em ms para envio de dados. Ex:60*1000=5seg
+#define RXD2 16                           // RXD2 do ESP32 conectado ao TX do GPS
+#define TXD2 17                           // TXD2 do ESP32 conectado ao RX do GPS
+#define GPS_BAUDRATE 9600                 // Baud rate do GPS
+#define WIFI_SSID "redewifi"              // SSID da rede WiFi
+#define WIFI_PASSWORD "senhawifi"         // Senha da rede WiFi
+#define MQTT_SERVER "broker.emqx.io"      // Endereço do servidor MQTT
+#define MQTT_PORT 1883                    // Porta do servidor MQTT
+#define MQTT_TOPIC_PREFIX "data/location" // Préfixo do tópico MQTT para publicar as coordenadas
+#define MQTT_USERNAME "emqx"              // Usuario do servidor
+#define MQTT_PASSWORD "public"            // Senha do usuario
+#define LED 2                             // Led interno do esp32
+#define LED_EXT 15                        // Led externo ao esp32
+#define DELAY 5000                        // Delay em ms para envio de dados. Ex:60*1000=5seg
 
-SoftwareSerial ss(RXD2, TXD2);         // Define a serial para comunicação com o GPS
-TinyGPSPlus gps;                       // Objeto para fazer o parsing dos dados do GPS
-WiFiClient wifiClient;                 // Cliente WiFi
-PubSubClient client(wifiClient);       // Cliente MQTT
-const int json = JSON_OBJECT_SIZE(10); // Tamanho do objeto
-StaticJsonDocument<json> doc;          // Criação do documento (objeto que vai ser publicado)
-size_t freeHeap = ESP.getFreeHeap();   // Quantidade de memória livre disponível na heap, que é a área de memória dinâmica usada pelo programa durante a execução
-
+SoftwareSerial ss(RXD2, TXD2);            // Define a serial para comunicação com o GPS
+TinyGPSPlus gps;                          // Objeto para fazer o parsing dos dados do GPS
+WiFiClient wifiClient;                    // Cliente WiFi
+PubSubClient client(wifiClient);          // Cliente MQTT
+const int json = JSON_OBJECT_SIZE(10);    // Tamanho do objeto
+StaticJsonDocument<json> doc;             // Criação do documento (objeto que vai ser publicado)
+size_t freeHeap = ESP.getFreeHeap();      // Quantidade de memória livre disponível na heap, que é a área de memória dinâmica usada pelo programa durante a execução
 DynamicJsonDocument doc2((freeHeap / 2)); // Criação de um documento com tamanho máximo igual a metade da memoria disponivel no ESP32
-JsonArray array = doc2.to<JsonArray>(); // Criação de um array de documentos
+JsonArray array = doc2.to<JsonArray>();   // Criação de um array de documentos
 
 // Função responsável por conectar ao Wifi
 void setup_wifi()
@@ -55,7 +54,7 @@ void setup_wifi()
   digitalWrite(LED, HIGH);
 }
 
-//Delay customizado com verificação do gps
+// Delay customizado com verificação do gps
 static void smartDelay(unsigned long ms)
 {
   unsigned long start = millis();
@@ -92,7 +91,7 @@ void loop()
 
     String client_id = "esp32-";
     client_id += String(WiFi.macAddress());
-    String topic = String(MQTT_TOPIC) + "/" + client_id;
+    String topic = String(MQTT_TOPIC_PREFIX) + "/" + client_id;
     client.connect(client_id.c_str(), MQTT_USERNAME, MQTT_PASSWORD);
 
     // se o cliente estiver conectado publica o
