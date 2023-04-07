@@ -1,7 +1,15 @@
 # Tracker
  Projeto de rastreador de geolocalização utilizando módulos GPS NEO-6M e o microcontrolador ESP32.
 
-# 1. Rotas
+# 1. Dispositivos e recursos necessarios
+
+- Protoboard
+- LED
+- ESP32 ESP-WROOM-32 DEVKit V1
+- Módulo GPS NEO-6M Com Antena
+- Fios
+
+# 2. Parâmetros
 
 | CONSTANTES        | Descrição                                                                              |
 | ----------------- | -------------------------------------------------------------------------------------- |
@@ -20,7 +28,19 @@
 | DELAY             | Delay em milissegundos (ms) para envio de dados. Ex: 5*1000 = 5 segundos               |
 
 
-# 2. Dto's
+# 3. Loop
+
+Para ajudar no entendimento, criou-se este fluxograma referente a função Loop()
+
+![plot](./assets/fluxograma_loop.png)
+
+# 4. Conexão
+
+Aqui é um exemplo de como deve ser feita a conexão dos dispositivos
+
+![plot](./assets/tracker.png)
+
+# 5. Dto's
 
 ```json
     {
