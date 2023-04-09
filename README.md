@@ -9,7 +9,14 @@
 - Módulo GPS NEO-6M Com Antena
 - Fios
 
-# 2. Parâmetros
+# 2. Bibliotecas utilizadas no ambiente de desenvolvimento
+
+- bblanchon/ArduinoJson@^6.20.1
+- plerup/EspSoftwareSerial@7.0.0
+- mikalhart/TinyGPSPlus@^1.0.3
+- knolleary/PubSubClient@^2.8
+
+# 3. Parâmetros
 
 | CONSTANTES        | Descrição                                                                              |
 | ----------------- | -------------------------------------------------------------------------------------- |
@@ -28,19 +35,19 @@
 | DELAY             | Delay em milissegundos (ms) para envio de dados. Ex: 5*1000 = 5 segundos               |
 
 
-# 3. Loop
+# 4. Loop
 
 Para ajudar no entendimento, criou-se este fluxograma referente a função Loop()
 
 ![plot](./assets/fluxograma_loop.png)
 
-# 4. Conexão
+# 5. Conexão
 
 Aqui é um exemplo de como deve ser feita a conexão dos dispositivos
 
 ![plot](./assets/tracker.png)
 
-# 5. Dto's
+# 6. Dto's
 
 ```json
     {

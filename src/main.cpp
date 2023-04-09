@@ -4,19 +4,19 @@
 #include <SoftwareSerial.h>
 #include <ArduinoJson.h>
 
-#define RXD2 16                      // RXD2 do ESP32 conectado ao TX do GPS
-#define TXD2 17                      // TXD2 do ESP32 conectado ao RX do GPS
-#define GPS_BAUDRATE 9600            // Baud rate do GPS
-#define WIFI_SSID "redewifi"         // SSID da rede WiFi
-#define WIFI_PASSWORD "senhawifi"    // Senha da rede WiFi
-#define MQTT_SERVER "broker.emqx.io" // Endereço do servidor MQTT
-#define MQTT_PORT 1883               // Porta do servidor MQTT
-#define MQTT_TOPIC_PREFIX "data/"    // Préfixo do tópico MQTT para publicar as coordenadas
-#define MQTT_USERNAME "emqx"         // Usuario do servidor
-#define MQTT_PASSWORD "public"       // Senha do usuario
-#define LED 2                        // Led interno do esp32
-#define LED_EXT 15                   // Led externo ao esp32
-#define DELAY 5000                   // Delay em ms para envio de dados. Ex:60*1000=5seg
+#define RXD2 16                          // RXD2 do ESP32 conectado ao TX do GPS
+#define TXD2 17                          // TXD2 do ESP32 conectado ao RX do GPS
+#define GPS_BAUDRATE 9600                // Baud rate do GPS
+#define WIFI_SSID "redewifi"             // SSID da rede WiFi
+#define WIFI_PASSWORD "senhawifi"        // Senha da rede WiFi
+#define MQTT_SERVER "broker.emqx.io"     // Endereço do servidor MQTT
+#define MQTT_PORT 1883                   // Porta do servidor MQTT
+#define MQTT_TOPIC_PREFIX "data/tracker" // Préfixo do tópico MQTT para publicar as coordenadas
+#define MQTT_USERNAME "emqx"             // Usuario do servidor
+#define MQTT_PASSWORD "public"           // Senha do usuario
+#define LED 2                            // Led interno do esp32
+#define LED_EXT 15                       // Led externo ao esp32
+#define DELAY 5000                       // Delay em ms para envio de dados. Ex:60*1000=5seg
 
 SoftwareSerial ss(RXD2, TXD2);            // Define a serial para comunicação com o GPS
 TinyGPSPlus gps;                          // Objeto para fazer o parsing dos dados do GPS
